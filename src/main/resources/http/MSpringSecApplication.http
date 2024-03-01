@@ -1,0 +1,33 @@
+POST http://localhost:8080/login/register
+Content-Type: application/json
+
+{
+
+  "email": "nima@ezample.com",
+  "pwd": "999",
+  "role": "admin"
+
+}
+
+<> 2024-03-01T192454.200.json
+
+###
+
+GET http://localhost:8080/login/getAllUser
+
+
+###
+
+
+GET http://localhost:8080/login/getUserById/2
+
+<> 2024-03-01T191732.200.json
+
+###
+
+GET http://localhost:8080/login/deleteuser/2
+
+<> 2024-03-01T191757.200.txt
+
+###
+
