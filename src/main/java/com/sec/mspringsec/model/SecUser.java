@@ -6,9 +6,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-@Entity
+@Entity(name = SecUser.Table_name)
 @Data
-public class Customer {
+public class SecUser {
+
+    public static final String Table_name = "SEC_USER";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
