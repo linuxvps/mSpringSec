@@ -13,7 +13,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class AppConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
         http.authorizeHttpRequests((requests) -> requests.requestMatchers("/card").authenticated());
         http.authorizeHttpRequests((requests) -> requests.requestMatchers("/login/**","/contactus").permitAll());
         http.formLogin(withDefaults());
