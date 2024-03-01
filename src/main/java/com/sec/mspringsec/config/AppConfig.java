@@ -1,11 +1,12 @@
 package com.sec.mspringsec.config;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -26,20 +27,17 @@ public class AppConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
 
-        UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("nimajan")
-                .password("12345")
-                .build();
+        UserDetails admin = User.withUsername("nimajan").password("12345").build();
 
-        UserDetails user = User.withDefaultPasswordEncoder().
-                username("user")
-                .password("1234")
-                .build();
-
+        UserDetails user = User.withUsername("user").password("1234").build();
 
         return new InMemoryUserDetailsManager(admin, user);
 
+    }
 
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
 
 }
