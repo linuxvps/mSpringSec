@@ -18,12 +18,12 @@ import java.util.List;
 public class EazyBankUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    SecUserRepository customerRepository;
+    SecUserRepository secUserRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //find User in custom table
-        List<SecUser> secUserList = customerRepository.findByEmail(username);
+        List<SecUser> secUserList = secUserRepository.findByEmail(username);
         //find first customer or throw exception
         SecUser customer = secUserList.stream().findFirst().orElseThrow(() -> new UsernameNotFoundException(username));
         //grant the customer

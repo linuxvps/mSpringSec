@@ -13,7 +13,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class AppConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
+        http.csrf().disable();
+        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/card").authenticated());
+        http.authorizeHttpRequests((requests) -> requests.requestMatchers("/login/**","/contactus").permitAll());
         http.formLogin(withDefaults());
         http.httpBasic(withDefaults());
         return http.build();
