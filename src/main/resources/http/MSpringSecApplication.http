@@ -3,7 +3,7 @@ Content-Type: application/json
 
 {
 
-  "email": "nima@ezample.com",
+  "email": "saba@ezample.com",
   "pwd": "999",
   "role": "admin"
 
