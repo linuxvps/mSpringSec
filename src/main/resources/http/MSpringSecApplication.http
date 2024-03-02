@@ -3,8 +3,8 @@ Content-Type: application/json
 
 {
 
-  "email": "saba@ezample.com",
-  "pwd": "999",
+  "email": "nima@ezample.com",
+  "pwd": "12345",
   "role": "admin"
 
 }
