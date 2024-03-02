@@ -25,11 +25,11 @@ public class EazyBankUserDetailsServiceImpl implements UserDetailsService {
         //find User in custom table
         List<SecUser> secUserList = secUserRepository.findByEmail(username);
         //find first customer or throw exception
-        SecUser customer = secUserList.stream().findFirst().orElseThrow(() -> new UsernameNotFoundException(username));
+        SecUser secUser = secUserList.stream().findFirst().orElseThrow(() -> new UsernameNotFoundException(username));
         //grant the customer
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(customer.getRole()));
+        authorities.add(new SimpleGrantedAuthority(secUser.getRole()));
         //make new user
-        return new User(customer.getEmail(), customer.getPwd(), authorities);
+        return new User(secUser.getEmail(), secUser.getPwd(), authorities);
     }
 }
