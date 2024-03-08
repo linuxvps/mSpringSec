@@ -17,7 +17,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class AppConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-
+        // cors config
         http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(request -> {
             CorsConfiguration configuration = new CorsConfiguration();
             configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
@@ -27,11 +27,16 @@ public class AppConfig {
             configuration.setMaxAge(3600L);
             return configuration;
         }));
+        // csrf config
         http.csrf(AbstractHttpConfigurer::disable);
+        // authorize config
         http.authorizeHttpRequests((requests) -> requests.requestMatchers("/card").authenticated());
         http.authorizeHttpRequests((requests) -> requests.requestMatchers("/login/**", "/contactus").permitAll());
+        //login page
         http.formLogin(withDefaults());
+        // idk
         http.httpBasic(withDefaults());
+        // return
         return http.build();
     }
 /*
