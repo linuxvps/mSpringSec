@@ -25,7 +25,6 @@ public class LoginController {
     }
 
     @GetMapping("/login/getAllUser")
-    @CrossOrigin(origins = "http://localhost:4200")
     public List<SecUserDto> getAllUser() {
             List<SecUserDto> allUsers = secUserService.getAllUsers();
         return allUsers;
