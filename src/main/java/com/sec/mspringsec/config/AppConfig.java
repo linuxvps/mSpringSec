@@ -3,6 +3,7 @@ package com.sec.mspringsec.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,9 +27,7 @@ public class AppConfig {
             configuration.setMaxAge(3600L);
             return configuration;
         }));
-
-
-        http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
+        http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests((requests) -> requests.requestMatchers("/card").authenticated());
         http.authorizeHttpRequests((requests) -> requests.requestMatchers("/login/**", "/contactus").permitAll());
         http.formLogin(withDefaults());
