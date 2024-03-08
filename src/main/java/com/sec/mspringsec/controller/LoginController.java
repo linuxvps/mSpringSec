@@ -5,6 +5,7 @@ import com.sec.mspringsec.Dto.SecUserDto;
 import com.sec.mspringsec.model.SecUser;
 import com.sec.mspringsec.service.SecUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class LoginController {
     }
 
     @GetMapping("/login/getAllUser")
+    @CrossOrigin(origins = "*")
     public List<SecUserDto> getAllUser() {
             List<SecUserDto> allUsers = secUserService.getAllUsers();
         return allUsers;
