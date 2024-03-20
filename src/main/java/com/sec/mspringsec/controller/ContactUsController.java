@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ContactUsController {
     @GetMapping("/contactus")
-    public String contactUs(){
-        return "contact Us here";
+    public String contactUs() {
+        return "{\"message\": \"Welcome to our contact page!\"}";
     }
 }
