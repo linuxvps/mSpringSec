@@ -6,6 +6,7 @@ import com.sec.mspringsec.model.SecUser;
 import com.sec.mspringsec.repository.SecUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class SecUserService {
     SecUserRepository secUserRepository;
     @Autowired
     ObjectMapper objectMapper;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 
     public SecUserDto findByEmail(String email) {
@@ -50,6 +54,9 @@ public class SecUserService {
 
     public SecUser saveUser(SecUserDto secUserDto) {
         SecUser user = objectMapper.convertValue(secUserDto, SecUser.class);
+        String pwd = user.getPwd();
+        String encodePwd = passwordEncoder.encode(pwd);
+        user.setPwd(encodePwd);
         return secUserRepository.save(user);
     }
 

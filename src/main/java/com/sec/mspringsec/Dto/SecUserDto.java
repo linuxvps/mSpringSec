@@ -14,4 +14,5 @@ public class SecUserDto {
     private String email;
     private String pwd;
     private String role;
+    private String fullName;
 }

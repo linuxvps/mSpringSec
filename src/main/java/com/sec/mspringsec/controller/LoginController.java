@@ -1,11 +1,11 @@
 package com.sec.mspringsec.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sec.mspringsec.Dto.SecUserDto;
 import com.sec.mspringsec.model.SecUser;
 import com.sec.mspringsec.service.SecUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,14 +19,22 @@ public class LoginController {
 
 
     @PostMapping("/login/register")
-    public int registerUser(@RequestBody SecUserDto secUserDto) {
-        SecUser user = secUserService.saveUser(secUserDto);
-        return user.getId();
+    public ResponseEntity<String> registerUser(@RequestBody SecUserDto secUserDto) {
+        ResponseEntity<String> response = null;
+        try {
+            SecUser user = secUserService.saveUser(secUserDto);
+            if (user.getId() > 0) {
+                response = ResponseEntity.status(HttpStatus.CREATED).body("the user successfully register");
+            }
+        } catch (Exception e) {
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("an exception occurred due to " + e.getMessage());
+        }
+        return response;
     }
 
     @GetMapping("/login/getAllUser")
     public List<SecUserDto> getAllUser() {
-            List<SecUserDto> allUsers = secUserService.getAllUsers();
+        List<SecUserDto> allUsers = secUserService.getAllUsers();
         return allUsers;
     }
 
@@ -42,4 +50,12 @@ public class LoginController {
         secUserService.deleteUser(id);
         return "ok";
     }
+
+    @GetMapping("/login/finduser")
+    public SecUserDto findUserByEmail(@PathVariable String email) {
+        SecUserDto secUserDto = secUserService.findByEmail(email);
+        return secUserDto;
+    }
+
+
 }

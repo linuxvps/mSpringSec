@@ -1,11 +1,11 @@
-POST http://localhost:8080/login/register
+POST http://localhost:8888/login/register
 Content-Type: application/json
 
 {
-
-  "email": "saba@ezample.com",
-  "pwd": "999",
-  "role": "admin"
+  "email": "nima@gmail.com",
+  "pwd": "11228",
+  "role": "admin",
+  "fullName": "nima alamshenas"
 
 }
 
